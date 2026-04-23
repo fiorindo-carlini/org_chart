@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organigramma Aziendale</title>
+
+    <!-- STRUTTURA DATI PER AI -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Azienda Demo",
+      "employee": [
+        {
+          "@type": "Person",
+          "name": "Mario Rossi",
+          "jobTitle": "Board Member"
+        },
+        {
+          "@type": "Person",
+          "name": "Luca Bianchi",
+          "jobTitle": "Board Member"
+        },
+        {
+          "@type": "Person",
+          "name": "Giuseppe Verdi",
+          "jobTitle": "Board Member"
+        },
+        {
+          "@type": "Person",
+          "name": "Andrea Conti",
+          "jobTitle": "CFO"
+        },
+        {
+          "@type": "Person",
+          "name": "Giovanna Di Ponzio",
+          "jobTitle": "HR"
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* (tuo CSS invariato) */
+    </style>
+</head>
+
+<body>
+
+<div class="container" itemscope itemtype="https://schema.org/Organization">
+
+    <header>
+        <div class="board-card" data-department="board">
+            <h1>Board <small>(387 total)</small></h1>
+
+            <div class="board-members">
+                <span itemprop="employee" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">Mario Rossi</span>
+                    <meta itemprop="jobTitle" content="Board Member">
+                </span> •
+
+                <span itemprop="employee" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">Luca Bianchi</span>
+                    <meta itemprop="jobTitle" content="Board Member">
+                </span> •
+
+                <span itemprop="employee" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">Giuseppe Verdi</span>
+                    <meta itemprop="jobTitle" content="Board Member">
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <div class="org-grid">
+
+        <!-- CFO -->
+        <div class="column" data-department="finance">
+            <div class="dept-header">
+                <span data-role="department">CFO</span>
+
+                <span class="manager"
+                      itemprop="employee"
+                      itemscope
+                      itemtype="https://schema.org/Person"
+                      data-role="manager">
+                      
+                    <span itemprop="name">Andrea Conti</span>
+                    <meta itemprop="jobTitle" content="CFO">
+                    (1)
+                </span>
+            </div>
+
+            <div class="unit" data-unit="accounts-payable">
+                Amm. Fornitori <span class="count">4</span>
+            </div>
+
+            <div class="unit" data-unit="accounts-receivable">
+                Amm. Clienti <span class="count">6</span>
+            </div>
+        </div>
+
+        <!-- HR -->
+        <div class="column" data-department="hr">
+            <div class="dept-header">
+                <span data-role="department">PERSONALE</span>
+
+                <span class="manager"
+                      itemprop="employee"
+                      itemscope
+                      itemtype="https://schema.org/Person"
+                      data-role="manager">
+                      
+                    <span itemprop="name">Giovanna Di Ponzio</span>
+                    <meta itemprop="jobTitle" content="HR Manager">
+                    (0.5)
+                </span>
+            </div>
+        </div>
+
+        <!-- SALES -->
+        <div class="column" data-department="sales">
+            <div class="dept-header">
+                <span data-role="department">VENDITE</span>
+
+                <span class="manager"
+                      itemprop="employee"
+                      itemscope
+                      itemtype="https://schema.org/Person">
+                      
+                    <span itemprop="name">Matteo Greco</span>
+                    <meta itemprop="jobTitle" content="Sales Manager">
+                    (1)
+                </span>
+            </div>
+
+            <div class="unit" data-unit="marketing">
+                Marketing <span class="count">4</span>
+            </div>
+
+            <div class="unit highlight" data-unit="area-managers">
+                Capiarea <span class="count">10</span>
+            </div>
+
+            <div class="unit highlight" data-unit="agents">
+                Agenti <span class="count">106</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
