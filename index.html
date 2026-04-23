@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organigramma Carlini Gomme - Clean Layout</title>
+    <title>Organigramma Ufficiale Carlini Gomme</title>
     <style>
         :root {
             --primary-blue: #0a4a83;
@@ -34,21 +34,25 @@
             padding-bottom: 20px;
         }
 
+        /* Board Styling */
         .board-card {
             background: var(--primary-blue);
             color: white;
             padding: 20px;
             display: inline-block;
             border-radius: 4px;
-            min-width: 300px;
+            min-width: 400px;
         }
 
         .board-card h1 { margin: 0 0 10px 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
-        .board-members { font-size: 0.9rem; font-weight: 300; line-height: 1.6; }
+        .board-list { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; gap: 15px; font-weight: 300; }
+        .board-list li::after { content: " •"; }
+        .board-list li:last-child::after { content: ""; }
 
+        /* Grid System */
         .org-grid {
             display: grid;
-            grid-template-columns: repeat(8, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 15px;
             align-items: start;
         }
@@ -59,27 +63,31 @@
             gap: 10px;
         }
 
-        .dept-header {
+        /* Department Card */
+        .dept-card {
             border-top: 3px solid var(--primary-blue);
             background: var(--light-blue);
             padding: 12px 8px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            min-height: 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            border-radius: 0 0 4px 4px;
         }
 
-        .dept-header .manager {
+        .role-title {
             display: block;
-            font-weight: 400;
+            font-size: 0.9rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: var(--text-main);
+        }
+
+        .manager-name {
+            display: block;
+            font-weight: 600;
             color: var(--primary-blue);
-            font-size: 0.75rem;
-            margin-top: 5px;
+            font-size: 0.8rem;
             text-transform: uppercase;
         }
 
+        /* Units */
         .unit {
             border: 1px solid var(--border-color);
             padding: 8px;
@@ -87,10 +95,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background 0.2s;
         }
-
-        .unit:hover { background: #f9f9f9; }
 
         .unit.highlight {
             border-left: 3px solid var(--accent-orange);
@@ -106,112 +111,100 @@
             border-radius: 3px;
         }
 
-        .highlight .count {
-            color: var(--accent-orange);
-            background: #ffe0cc;
-        }
-
         @media (max-width: 1200px) {
-            .org-grid { grid-template-columns: repeat(4, 1fr); }
+            .org-grid { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
-<body>
+<body itemscope itemtype="https://schema.org/Organization">
 
 <div class="container">
     <header>
-        <div class="board-card">
-            <h1>Board <small>(387 total)</small></h1>
-            <div class="board-members">
-                Mario Rossi • Luca Bianchi • Giuseppe Verdi
-            </div>
+        <div class="board-card" itemprop="department" itemscope itemtype="https://schema.org/Organization">
+            <h1 itemprop="name">Board of Directors <small>(387 total)</small></h1>
+            <ul class="board-list">
+                <li itemprop="member" itemscope itemtype="https://schema.org/Person"><span itemprop="name">Mario Rossi</span></li>
+                <li itemprop="member" itemscope itemtype="https://schema.org/Person"><span itemprop="name">Luca Bianchi</span></li>
+                <li itemprop="member" itemscope itemtype="https://schema.org/Person"><span itemprop="name">Giuseppe Verdi</span></li>
+            </ul>
         </div>
     </header>
 
-    <div class="org-grid">
-        <div class="column">
-            <div class="dept-header">
-                CFO
-                <span class="manager">Andrea Conti (1)</span>
-            </div>
+    <main class="org-grid">
+        
+        <section class="column" itemprop="department" itemscope itemtype="https://schema.org/Organization">
+            <article class="dept-card">
+                <span class="role-title" itemprop="name">CFO (Chief Financial Officer)</span>
+                <div itemprop="member" itemscope itemtype="https://schema.org/Person">
+                    <span class="manager-name" itemprop="name">Andrea Conti</span>
+                    <meta itemprop="jobTitle" content="CFO">
+                </div>
+            </article>
             <div class="unit">Amm. Fornitori <span class="count">4</span></div>
             <div class="unit">Amm. Clienti <span class="count">6</span></div>
             <div class="unit">Amm. Generale <span class="count">2</span></div>
-            <div class="unit">Tesoroeria <span class="count">0.5</span></div>
             <div class="unit">Controller <span class="count">1</span></div>
-        </div>
+        </section>
 
-        <div class="column">
-            <div class="dept-header">
-                PERSONALE
-                <span class="manager">Francesca Romano (0.5)</span>
-            </div>
-        </div>
+        <section class="column" itemprop="department" itemscope itemtype="https://schema.org/Organization">
+            <article class="dept-card">
+                <span class="role-title" itemprop="name">PERSONALE / HR</span>
+                <div itemprop="member" itemscope itemtype="https://schema.org/Person">
+                    <span class="manager-name" itemprop="name">Francesca Romano</span>
+                    <meta itemprop="jobTitle" content="HR Manager">
+                </div>
+            </article>
+        </section>
 
-        <div class="column">
-            <div class="dept-header">
-                VENDITE
-                <span class="manager">Matteo Greco (1)</span>
-            </div>
+        <section class="column" itemprop="department" itemscope itemtype="https://schema.org/Organization">
+            <article class="dept-card">
+                <span class="role-title" itemprop="name">VENDITE (SALES)</span>
+                <div itemprop="member" itemscope itemtype="https://schema.org/Person">
+                    <span class="manager-name" itemprop="name">Matteo Greco</span>
+                    <meta itemprop="jobTitle" content="Sales Manager">
+                </div>
+            </article>
             <div class="unit">Marketing <span class="count">4</span></div>
             <div class="unit highlight">Capiarea <span class="count">10</span></div>
             <div class="unit highlight">Agenti <span class="count">106</span></div>
-        </div>
+        </section>
 
-        <div class="column">
-            <div class="dept-header">
-                OPERATIONS
-                <span class="manager">Alessandro Ferri (1)</span>
-            </div>
+        <section class="column" itemprop="department" itemscope itemtype="https://schema.org/Organization">
+            <article class="dept-card">
+                <span class="role-title" itemprop="name">OPERATIONS</span>
+                <div itemprop="member" itemscope itemtype="https://schema.org/Person">
+                    <span class="manager-name" itemprop="name">Alessandro Ferri</span>
+                    <meta itemprop="jobTitle" content="Operations Manager">
+                </div>
+            </article>
             <div class="unit">Acquisti <span class="count">9</span></div>
-            <div class="unit">Export <span class="count">1</span></div>
-            <div class="unit highlight">Agenti & Backoffice <span class="count">2</span></div>
-            <div class="unit">PFU Import <span class="count">4</span></div>
-            <div class="unit">HSE <span class="count">1</span></div>
-        </div>
+        </section>
 
-        <div class="column">
-            <div class="dept-header">
-                PROCESSI OPERATIVI
-                <span class="manager">Stefano De Luca (1)</span>
-            </div>
-            <div class="unit">Resi e Reclami <span class="count">3</span></div>
-            <div class="unit">Assistenza <span class="count">2</span></div>
-            <div class="unit">Call Center <span class="count">8</span></div>
-        </div>
+        <section class="column" itemprop="department" itemscope itemtype="https://schema.org/Organization">
+            <article class="dept-card">
+                <span class="role-title" itemprop="name">CTO (Technology)</span>
+                <div itemprop="member" itemscope itemtype="https://schema.org/Person">
+                    <span class="manager-name" itemprop="name">Marco Ricci</span>
+                    <meta itemprop="jobTitle" content="CTO">
+                </div>
+            </article>
+            <div class="unit">IT Infrastructure <span class="count">2</span></div>
+            <div class="unit">Development <span class="count">1</span></div>
+        </section>
 
-        <div class="column">
-            <div class="dept-header">
-                RETAIL
-                <span class="manager">Davide Lombardi (1)</span>
-            </div>
-            <div class="unit">Back Office <span class="count">2</span></div>
-            <div class="unit">Tecnici/Operai <span class="count">5</span></div>
-        </div>
-
-        <div class="column">
-            <div class="dept-header">
-                CTO
-                <span class="manager">Marco Ricci (1)</span>
-            </div>
-            <div class="unit">IT Manager <span class="count">1</span></div>
-            <div class="unit">Infrastruttura <span class="count">2</span></div>
-            <div class="unit">Sviluppo <span class="count">1</span></div>
-            <div class="unit">BI <span class="count">1</span></div>
-        </div>
-
-        <div class="column">
-            <div class="dept-header">
-                LOGISTICA
-                <span class="manager">Paolo Galli (1)</span>
-            </div>
-            <div class="unit">Trasporti <span class="count">2</span></div>
-            <div class="unit">Facility <span class="count">1</span></div>
-            <div class="unit">Resp. Magazzini <span class="count">14</span></div>
+        <section class="column" itemprop="department" itemscope itemtype="https://schema.org/Organization">
+            <article class="dept-card">
+                <span class="role-title" itemprop="name">LOGISTICA</span>
+                <div itemprop="member" itemscope itemtype="https://schema.org/Person">
+                    <span class="manager-name" itemprop="name">Paolo Galli</span>
+                    <meta itemprop="jobTitle" content="Logistics Manager">
+                </div>
+            </article>
             <div class="unit highlight">Magazzinieri <span class="count">175</span></div>
             <div class="unit">Autisti <span class="count">2</span></div>
-        </div>
-    </div>
+        </section>
+
+    </main>
 </div>
 
 </body>
